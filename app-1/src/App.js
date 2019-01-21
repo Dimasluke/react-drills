@@ -3,16 +3,27 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor (props){
+    super(props);
+    this.state = {
+      text: '',
+      words: ["one", "two", "three", "four", "four"]
+    }
+  }
+
+  updateText (value) {
+    this.setState({
+      text: value
+    })
+  }
+
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <input onChange={e => this.updateText(e.target.value)} value={this.state.text} />
+        <h1>{this.state.words.map(e => <h2>{e}</h2>).filter(e => e === this.state.text)}</h1>
+
+        
       </div>
     );
   }
