@@ -17,13 +17,23 @@ class App extends Component {
     })
   }
 
-  render() {
-    return (
-      <div>
-        <input onChange={e => this.updateText(e.target.value)} value={this.state.text} />
-        <h1>{this.state.words.map(e => <h2>{e}</h2>).filter(e => e === this.state.text)}</h1>
+  handleChange( filter ){
+    this.setState({
+      text: filter
+    })
+  }
 
-        
+  render() {
+  let numbersToDisplay = this.state.words.filter((element, index) => {
+    return element.includes(this.state.text)
+  }).map((element, index) => {
+    return <h2 key={index}>{element}</h2>
+  })
+
+    return (
+      <div className="App">
+        <input onChange={ (e) => this.handleChange( e.target.value ) } type="text" />  
+        {numbersToDisplay}
       </div>
     );
   }
